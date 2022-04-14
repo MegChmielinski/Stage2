@@ -17,6 +17,7 @@
                 <th>Adresse</th>
                 <th>CodePostal</th>
                 <th>Ville</th>
+                <th>images</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -27,11 +28,12 @@
                 <td>{{ personne.nom }}</td>
                 <td>{{ personne.prenom }}</td>
                 <td>{{ personne.dateNaissance ? personne.dateNaissance|date('Y-m-d') : '' }}</td>
-                <td>{{ personne.sexe ? 'Yes' : 'No' }}</td>
+                <td>{{ personne.sexe }}</td>
                 <td>{{ personne.statutMarital }}</td>
                 <td>{{ personne.adresse }}</td>
                 <td>{{ personne.codePostal }}</td>
                 <td>{{ personne.ville }}</td>
+                <td><img src="{{ vich_uploader_asset(personne, 'imageFile') }}" width="100"/></td>
                 <td>
                     <a href="{{ path('app_personne_show', {'id': personne.id}) }}">show</a>
                     <a href="{{ path('app_personne_edit', {'id': personne.id}) }}">edit</a>

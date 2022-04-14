@@ -4,9 +4,11 @@ namespace App\Form;
 
 use App\Entity\Personne;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PersonneType extends AbstractType
 {
@@ -19,11 +21,21 @@ class PersonneType extends AbstractType
                 // renders it as a single text box
                 'widget' => 'single_text',
             ])
-            ->add('sexe')
+
+            ->add('sexe', ChoiceType::class, [
+                'choices' => [
+                    'Homme' => 'h',
+                    'Femme' => 'f',
+                ],
+            ])
             ->add('statutMarital')
             ->add('adresse')
             ->add('codePostal')
             ->add('ville')
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+            ])
         ;
     }
 
