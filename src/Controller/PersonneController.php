@@ -5,10 +5,14 @@ namespace App\Controller;
 use App\Entity\Personne;
 use App\Form\PersonneType;
 use App\Repository\PersonneRepository;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/personne')]
 class PersonneController extends AbstractController
@@ -22,14 +26,46 @@ class PersonneController extends AbstractController
     }
 
     #[Route('/new', name: 'app_personne_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, PersonneRepository $personneRepository): Response
+    public function new(Request $request,EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
+
         $personne = new Personne();
         $form = $this->createForm(PersonneType::class, $personne);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $personneRepository->add($personne);
+            $imageFile = $form->get('shoulderImage')->getData();
+            $imageFile2 = $form->get('idCardFile')->getData();
+
+            if($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+
+                $imageFile->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename
+                );
+                $personne->setImage($newFilename);
+            }
+
+                if($imageFile2) {
+                    $originalFilename2 = pathinfo($imageFile2->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename2 = $slugger->slug($originalFilename2);
+                    $newFilename2 = $safeFilename2 . '-' . uniqid() . '.' . $imageFile2->guessExtension();
+
+                    $imageFile2->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename2
+                    );
+                    $personne->setImage($newFilename2);
+                }
+
+            $personne->setUpdatedAt(new DateTime('NOW'));
+            $em->persist($personne);
+            $em->flush();
+
+
             return $this->redirectToRoute('app_personne_index', [], Response::HTTP_SEE_OTHER);
         }
 

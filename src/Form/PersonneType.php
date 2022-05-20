@@ -6,6 +6,7 @@ use App\Entity\Personne;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -32,9 +33,15 @@ class PersonneType extends AbstractType
             ->add('adresse')
             ->add('codePostal')
             ->add('ville')
-            ->add('imageFile', VichImageType::class, [
+            ->add('idCardFile', FileType::class, [
+                'mapped' => false,
                 'required' => false,
-                'allow_delete' => true,
+                'label' => 'Carte Nationale d\'Identité',
+            ])
+            ->add('shoulderImage', FileType::class, [
+                'mapped' => false,
+                'required' => false,
+                'label' => 'Photo Buste',
             ])
         ;
     }
