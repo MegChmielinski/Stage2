@@ -41,7 +41,7 @@ class PersonneType extends AbstractType
             ->add('shoulderImage', FileType::class, [
                 'mapped' => false,
                 'required' => false,
-                'label' => 'Photo Buste',
+                'label' => 'Photo Buste'
             ])
         ;
     }
