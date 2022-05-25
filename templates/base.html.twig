@@ -3,20 +3,46 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+
+        <link rel="stylesheet" href="https://bootswatch.com/5/zephyr/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    
         {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        {% block javascripts %}{% endblock %}
     </head>
-    <body>
-    <nav>
-        <a href="{{ path("app_home") }}">Accueil</a>
-    </nav>
-        {% block body %}{% endblock %}
-    </body>
+<body>
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+         <a class="navbar-brand" href="/">Recensement</a>
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+               <li class="nav-item">
+                  <a class="nav-link active" href="{{ path('app_personne_new') }}">Ajouter une personne
+                  <span class="visually-hidden">(current)</span>
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="/">Accueil</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="/personne">Liste des personnes</a>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </nav>
+   <div class="container">
+      {% block body %}{% endblock %}
+   </div>
+   <div class="footer-clean">
+      <footer>
+      </footer>
+   </div>
+</body>
+    
 </html>

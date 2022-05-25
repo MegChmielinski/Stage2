@@ -1,0 +1,111 @@
+{% apply inline_css %}
+
+    <style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+body {
+  background-color: #E8E5E4;
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+
+div.table-title {
+   display: block;
+  margin: auto;
+  max-width: 600px;
+  padding:5px;
+  width: 100%;
+}
+
+.table-title h3 {
+   color: black;
+	 text-align:center;
+   font-size: 30px;
+   font-weight: 400;
+	 font-weight: bold;
+   font-style:normal;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+}
+
+
+/*** Table Styles **/
+
+.table-fill {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  height: 320px;
+  margin: auto;
+  max-width: 1500px;
+  padding:5px;
+  width: 70%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+	table-layout: fixed;
+}
+ 
+th {
+  color:black;;
+  background:#E19881;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:18px;
+  font-weight: bold;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+  
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:16px;
+	 width: 100px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+td {
+  background:BLACK;
+  color:white;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:bold;
+  font-size:18px;
+	width: 210px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+</style> 
+<div class="table-title">
+   <h3>Nouvelle demande</h3>
+</div>
+<table class="table-fill">
+   <head>
+      <tr>
+         <td class="text-left">Nom :</td>
+         <th class="text-left">{{ nom }}</th>
+      </tr>
+      <tr>
+         <td class="text-left">Email :</td>
+         <th class="text-left">{{ email1 }}</t>
+      </tr>
+      <tr>
+         <td class="text-left">Numéro de téléphone  :</td>
+         <th class="text-left">{{ numero }}</th>
+      <tr>
+         <td class="text-left">Sujet :</td>
+         <th class="text-left">{{ sujet }}</th>
+      </tr>
+      <tr>
+         <td class="text-left">Demande :</td>
+         <th class="text-left">{{ message }}</th>
+      </tr>
+   </head>
+</table>
+ {% endapply %}
