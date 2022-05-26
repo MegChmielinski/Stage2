@@ -45,10 +45,10 @@ class Personne
     #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $updatedAt;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $shoulderImage;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $idCardFile;
 
 
